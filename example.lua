@@ -3,9 +3,10 @@
 -- ===============================================
 
 -- Загрузка библиотеки
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/sh0tzik/notasexyuilib/refs/heads/main/src.lua",true))()
--- Создание UI с Discord вебхуком
-local UI = Library:new("https://discord.com/api/webhooks/YOUR_WEBHOOK_URL", "users.json")
+local Library = loadstring(game:HttpGet(""))()
+
+-- Создание UI с Discord вебхуком (ЗАМЕНИ НА СВОЙ ВЕБХУК!)
+local UI = Library:new("https://discord.com/api/webhooks/1234567890/abcdefghijklmnop", "users.json")
 
 -- Получение информации о пользователе
 local uid = UI:GetUID()
@@ -59,17 +60,62 @@ end)
 -- ОСНОВНОЙ ЦИКЛ
 -- ===============================================
 
+-- Переменные для мыши
+local mouseX, mouseY = 0, 0
+local mousePressed = false
+
+-- Функции для получения позиции мыши (заглушки)
+function GetMousePosition()
+    return mouseX, mouseY
+end
+
+function IsMousePressed()
+    return mousePressed
+end
+
+-- Основной цикл обновления
 function Update()
-    -- Получение позиции мыши и состояния кнопок
-    local mouseX, mouseY = GetMousePosition() -- ваша функция получения позиции мыши
-    local mousePressed = IsMousePressed()     -- ваша функция проверки нажатия мыши
-    
     -- Обновление UI
     UI:Update(mouseX, mouseY, mousePressed)
     
     -- Рендер UI
-    UI:Render(screenWidth, screenHeight)
+    UI:Render(800, 600) -- Размер экрана
 end
+
+-- Запуск основного цикла
+spawn(function()
+    while true do
+        Update()
+        wait(1/60) -- 60 FPS
+    end
+end)
+
+-- Отправка уведомления о входе в Discord
+UI:SendDiscordNotification("login")
+
+-- Симуляция движения мыши для демонстрации
+spawn(function()
+    while true do
+        mouseX = mouseX + math.random(-5, 5)
+        mouseY = mouseY + math.random(-5, 5)
+        
+        -- Ограничение координат
+        mouseX = math.max(0, math.min(800, mouseX))
+        mouseY = math.max(0, math.min(600, mouseY))
+        
+        wait(0.1)
+    end
+end)
+
+-- Симуляция кликов мыши
+spawn(function()
+    while true do
+        wait(math.random(2, 5))
+        mousePressed = true
+        wait(0.1)
+        mousePressed = false
+    end
+end)
 
 -- ===============================================
 -- ДОПОЛНИТЕЛЬНЫЕ ПРИМЕРЫ

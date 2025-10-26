@@ -7,7 +7,7 @@
 Для использования Beautiful UI Library, загрузите её через loadstring:
 
 ```lua
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/yourusername/beautiful-ui-library/main/Library.lua"))()
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/sh0tzik/notasexyuilib/refs/heads/main/src.lua",true))()
 ```
 
 Затем создайте экземпляр библиотеки:

@@ -3,10 +3,11 @@
 -- ===============================================
 
 -- Загрузка библиотеки
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/sh0tzik/notasexyuilib/refs/heads/main/src.lua",true))()
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/sh0tzik/notasexyuilib/refs/heads/main/src.lua"))()
 
 -- Создание UI с Discord вебхуком (ЗАМЕНИ НА СВОЙ ВЕБХУК!)
-local UI = Library:new("https://discord.com/api/webhooks/1234567890/abcdefghijklmnop", "users.json")
+-- Можно оставить пустым для работы без Discord: local UI = Library:new("", "users.json")
+local UI = Library:new("https://discord.com/api/webhooks/YOUR_WEBHOOK_URL_HERE", "users.json")
 
 -- Получение информации о пользователе
 local uid = UI:GetUID()
